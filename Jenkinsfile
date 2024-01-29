@@ -1,9 +1,9 @@
 pipeline {
     agent any
     tools {
-      maven 'maven3'
-      jdk 'JDK8'
-      jfrog 'cli'         
+      maven 'MAVEN3'
+      /*jdk 'JDK8'
+      jfrog 'cli'        
     }
     environment {
         DOCKER_IMAGE_NAME = "slk.jfrog.io/fis-demo-dockerhub/app-image.${BUILD_ID}.${env.BUILD_NUMBER}"
@@ -12,26 +12,26 @@ pipeline {
         BUILD_NAME = "${JOB_NAME}"
         BUILD_NO = "${env.BUILD_NUMBER}"
        
-    }
-    options {
+    }*/ 
+    /*options {
         office365ConnectorWebhooks([
             [name: "Office 365", Url: credentials("webhook_url"), notifyBackToNormal: true, notifyFailure: true, notifyRepeatedFailure: true, notifySuccess: true, notifyAborted: true]
         ])
-      }
+      }*/
     stages {
         stage ('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanchita57/Demo_app1.git'
             }
         }
-        stage ('Build') {
+       /* stage ('Build') {
             steps {        
                 sh 'mvn clean install'
                 sh 'cp ./target/*.jar ./'
                 sh 'pwd'
                 sh 'docker images'
             }
-        }
+        }*/
        /* stage('Push artifacts into artifactory') {
              steps {
                    sh 'curl -fL https://getcli.jfrog.io | sh'
@@ -62,20 +62,20 @@ pipeline {
                 )
             } 
         } */   
-        stage ('SonarQube analysis') {
+       /* stage ('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                 sh 'mvn sonar:sonar'
                 }
             }
-        }   
+        }  
         stage('Build Docker image') {
 			steps {
 				script {
 					docker.build("$DOCKER_IMAGE_NAME", './')
 				}
 			}
-		}
+		}*/
 		/*stage('Trivy Scan') {
             steps {
                 // Install trivy
@@ -104,7 +104,7 @@ pipeline {
 
             }
 		}   */ 
-        stage('Scan and push image') {
+        /*stage('Scan and push image') {
 			steps {
 				dir('${WORKSPACE}') {
 					// Scan Docker image for vulnerabilities
@@ -114,7 +114,7 @@ pipeline {
 					jf 'docker push $DOCKER_IMAGE_NAME'
 				}
 			}
-		}
+		}*/
 
 		/*stage('Publish build info') {
 			steps {
