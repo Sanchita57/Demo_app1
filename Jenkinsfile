@@ -150,7 +150,7 @@ pipeline {
           //  message: "Success"
         //    )      
         }
-
+}
         failure {
            // office365ConnectorSend(
          //    status: "Build Failed",
