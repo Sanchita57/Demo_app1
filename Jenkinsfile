@@ -2,10 +2,10 @@ pipeline {
     agent any
     tools {
       maven 'MAVEN3'
-      /*jdk 'JDK8'
-      jfrog 'cli'        
+      //jdk 'JDK8'
+     // jfrog 'cli'        
     }
-    environment {
+    /*environment {
         DOCKER_IMAGE_NAME = "slk.jfrog.io/fis-demo-dockerhub/app-image.${BUILD_ID}.${env.BUILD_NUMBER}"
         ARTIFACTORY_ACCESS_TOKEN = credentials('jf_access_token')
         WEBHOOK_URL = credentials("webhook_url")
