@@ -159,6 +159,6 @@ pipeline {
           //  message: "The build has failed, please check build logs"
         // )
             echo 'Build Failed'
-        }
-    }*/
+        }*/
+    }
 }
